@@ -4,11 +4,11 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Messaging UI Workflow improvements</title>
 
 		<link rel="stylesheet" href="dist/reset.css">
 		<link rel="stylesheet" href="dist/reveal.css">
-		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+		<link rel="stylesheet" href="dist/theme/night.css" id="theme">
 
 		<!-- Theme used for syntax highlighted code -->
 		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
@@ -16,8 +16,122 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<section><h2>Workflow, Monitoring & Automating stuff!</h2></section>
+					<section><h2>Grab a coffee ☕️</h2></section>
+					<section><h2>Do it....</h2></section>
+					<section><h2>👀</h2></section>
+				</section>
+
+				<section><h1>Monitoring</h1></section>
+
+				<section>
+					<section><h2>Heap</h2></section>
+					<section>
+						<p class="fragment fade-in">Type of events</p>
+						<p class="fragment fade-in">Initial Landing Page</p>
+						<p class="fragment fade-in">Clicks, submits, errors</p>
+						<p class="fragment fade-in">Previous pages visited</p>
+						<p class="fragment fade-in">Defined Events (messaging-console.alert.error)</p>
+					</section>
+				</section>
+				<section><img data-src="/static/heap.png" /></section>
+				<section>
+					<p class="fragment fade-in">Takeaway</p>
+					<p class="fragment fade-in">Create defined events (https://heapanalytics.com/app/visualizer)</p>
+					<p class="fragment fade-in">Add data attributes [data-heap="create messaging service"]</p>
+					<p class="fragment fade-in">Add tracking tag in JIRA</p>
+				</section>
+
+				<section>
+					<p class="fragment fade-in">Benefits of improving Heap monitoring</p>
+					<p class="fragment fade-in">Help PMs identify user behaviour in console</p>
+					<p class="fragment fade-in">Can be used as a secondary monitoring tool for console</p>
+					<p class="fragment fade-in">Side effect is more data tags for e2e</p>
+				</section>
+
+				<section><h2>Rollbar</h2></section>
+				<section>
+					<pre>
+						<code>
+// Caught errors
+try {
+	updateResource();
+} catch (e) {
+	Rollbar.error("Something went wrong", e);
+}
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<pre>
+						<code>
+// Arbitrary log messages. 'critical' is most severe;
+// 'debug' is least.
+Rollbar.critical("Connection error from remote downstream API");
+Rollbar.error("Some unexpected condition");
+Rollbar.warning("Connection error from new API service");
+Rollbar.info("User opened the services dialog");
+Rollbar.debug("Advanced Opt Out finished updating");
+						</code>
+					</pre>
+				</section>
+
+				<section><img data-src="/static/rollbar.png" /></section>
+				<section><iframe src="https://giphy.com/embed/vSSdLSLbGIXio" width="480" height="454" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></section>
+
+				<section>
+					<p class="fragment fade-in">Takeaway</p>
+					<p class="fragment fade-in">Use rollbar for possible error prone areas</p>
+					<p class="fragment fade-in">Build light weight tooling around Rollbar</p>
+					<p class="fragment fade-in">Filter out noise and scrub HIPAA sensitive information</p>
+					<p class="fragment fade-in">Tooling would benefit us currently and next gen console 🎉</p>
+				</section>
+
+				<section><h2>Webpack improvements 🎢</h2></section>
+				<section>
+					<section><h2>Bundle budgets!</h2></section>
+					<section><img data-src="/static/lighthouse.png" /></section>
+				</section>
+
+				<section>
+					maxAssetSize
+					<pre>
+						<code>
+module.exports = {
+	//...
+	performance: {
+		maxAssetSize: 100000
+	}
+};
+						</code>
+					</pre>
+				</section>
+
+				<section>
+					<section><h2>Pre rendering route pages</h2></section>
+					<section>
+						<img data-src="/static/prerender.png" />
+					</section>
+					<section>
+						<img data-src="/static/webpack.png" />
+					</section>
+				</section>
+
+				<section>
+					Links: <br />
+					<p class="fragment fade-in"><h6>https://github.com/apps/lighthouse-ci</h6></p>
+					<p class="fragment fade-in"><h6>https://help.heap.io/getting-started/how-heap-works/autocaptured-data</h6></p>
+					<p class="fragment fade-in"><h6>https://developers.heap.io/docs/using-react-with-heap</h6></p>
+					<p class="fragment fade-in"><h6>https://webpack.js.org/configuration/performance/#performancemaxassetsize</h6></p>
+					<p class="fragment fade-in"><h6>https://github.com/chrisvfritz/prerender-spa-plugin#readme</h6></p>
+				</section>
+
+				<section>
+					<iframe src="https://giphy.com/embed/2FaznsStYLpCNFhwQ" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+					<br />Thanks! Questions?
+				</section>
 			</div>
 		</div>
 
